@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2011 Mark H. Wood -->
+
+<!--
+    Document   : test.xml
+    Created on : December 18, 2011, 6:15 PM
+    Author     : mhwood
+    Description:
+        Purpose of the document follows.
+-->
+
+<initialContext>
+    <context name='comp'>
+        <context name='env'>
+            <context name='jdbc'>
+                <object name='test'
+                        class='net.wood.jndi.EphemeralContext.PostgreSQLDataSource'
+                        serverName='localhost'
+                        databaseName='mhwood'
+                    />
+            </context>
+        </context>
+    </context>
+</initialContext>
