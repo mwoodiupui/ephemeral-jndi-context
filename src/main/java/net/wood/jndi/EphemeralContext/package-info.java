@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Mark H. Wood
+ * Copyright 2011, 2012 Mark H. Wood
  */
 
 /**
@@ -18,15 +18,34 @@
  * 
  * <p>Initial content is described by a classpath resource which is named by
  * the PROVIDER_URL.  This can be specified with -Djava.naming.provider.url=/some/path
- * or in jndi.properties.  TODO is this true?</p>
+ * or in a jndi.properties.</p>
  * 
- * <p>TODO describe the configuration schema</p>
+ * <p>The initial content is an XML document composed of the following elements.
+ *  <dl>
+ *   <dt>initialContext</dt>
+ *   <dd>The root element of the document.</dd>
  * 
- * <p>String-valued objects are directly supported.  Support for arbitrary
- * complex objects may be added by providing "PropertyEditor" implementations
- * which interpret the attributes of an {@code object} element and optionally
- * supply custom SAX {@code Handler}s for any content.  The {@code PropertyEditor}
- * is specified by the {@code class} attribute of the {@code object} element.</p>
+ *   <dt>context</dt>
+ *   <dd>A named container of other elements.  The {@code name} attribute is required.</dd>
+ * 
+ *   <dt>text</dt>
+ *   <dd>A String-valued leaf object.  This is currently the only primitive type.
+ *      The {@code name} attribute is required.</dd>
+ * 
+ *   <dt>object</dt>
+ *   <dd>An arbitrary object, to be constructed by a named {@link PropertyEditor}.
+ *      Attributes:
+ *      <dl>
+ *          <dt>name</dt><dd>name of the object in the directory
+ *          <dt>class</dt><dd>fully-qualified name of the needed {@code PropertyEditor} class.</dd>
+ *      </dl>
+ *   </dd>
+ *  </dl>
+ * </p>
+ * 
+ * <p>A {@code PropertyEditor} implementation for PostgreSQL {@code DataSource}
+ * objects is supplied.  See the {@link PropertyEditor} interface if you need to
+ * implement other types.</p>
  */
 
 package net.wood.jndi.EphemeralContext;

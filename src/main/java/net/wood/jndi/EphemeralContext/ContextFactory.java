@@ -15,6 +15,13 @@ import javax.naming.spi.InitialContextFactory;
 public class ContextFactory
         implements InitialContextFactory
 {
+    /**
+     * Create an EphemeralContext holding the given environment.
+     * 
+     * @param environment
+     * @return
+     * @throws NamingException
+     */
     public javax.naming.Context getInitialContext(Hashtable<?, ?> environment)
             throws NamingException
     {
