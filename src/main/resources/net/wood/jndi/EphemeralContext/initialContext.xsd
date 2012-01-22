@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : initialContext.xsd
+    Created on : January 18, 2012, 9:14 PM
+    Author     : mhwood
+    Description:
+        Schema for net.wood.jndi.EphemeralContext initial content.
+-->
+
+<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+
+    <xsd:element name='initialContext'>
+        <xsd:complexType>
+            <xsd:choice maxOccurs='unbounded'>
+                <xsd:element ref='context'/>
+                <xsd:element ref='text'/>
+                <xsd:element ref='object'/>
+            </xsd:choice>
+            <xsd:attribute name='name' type='xsd:string'/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name='context'>
+        <xsd:complexType>
+            <xsd:choice maxOccurs='unbounded'>
+                <xsd:element ref='context'/>
+                <xsd:element ref='text'/>
+                <xsd:element ref='object'/>
+            </xsd:choice>
+            <xsd:attribute name='name' type='xsd:string' use='required'/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name='text'>
+        <xsd:complexType mixed='true'>
+            <xsd:attribute name='name' type='xsd:string' use='required'/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name='object'>
+        <xsd:complexType>
+            <xsd:attribute name='class' type='xsd:NCName' use='required'/>
+            <xsd:attribute name='name' type='xsd:string' use='required'/>
+	    <xsd:anyAttribute processContents='lax'/>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>
