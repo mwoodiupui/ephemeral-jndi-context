@@ -9,9 +9,12 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Hashtable;
 import javax.naming.*;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -82,14 +85,15 @@ class Context implements javax.naming.Context
             {
                 // Load content
                 SAXParserFactory spf = SAXParserFactory.newInstance();
-                SAXParser parser;
+                SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
                 try
                 {
-                    parser = spf.newSAXParser();
+                    Schema mySchema = sf.newSchema(this.getClass().getResource(
+                            "initialContext.xsd"));
+                    spf.setSchema(mySchema);
+                    SAXParser parser = spf.newSAXParser();
                     InputStream content = Context.class.getResourceAsStream(contentPath);
-                    parser.parse(
-                            content,
-                            new SAXHandler(parser, this));
+                    parser.parse(content,new SAXHandler(parser, this));
                 } catch (IOException ex) {
                     // FIXME handle IOException
                     log.error("parsing initial content:", ex);
