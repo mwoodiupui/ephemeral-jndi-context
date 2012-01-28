@@ -6,6 +6,7 @@ package net.wood.jndi.EphemeralContext;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
 import javax.naming.*;
@@ -86,24 +87,30 @@ class Context implements javax.naming.Context
                 // Load content
                 SAXParserFactory spf = SAXParserFactory.newInstance();
                 SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                InputStream content;
                 try
                 {
+                    URL contentResource = Context.class.getResource(contentPath);
+                    log.info("Loading initial content from {}", contentResource);
+                    content = contentResource.openStream();
+                } catch (IOException ex) {
+                    log.error("Could not open initial content:", ex);
+                    return;
+                }
+
+                try {
                     Schema mySchema = sf.newSchema(this.getClass().getResource(
                             "initialContext.xsd"));
                     spf.setSchema(mySchema);
                     SAXParser parser = spf.newSAXParser();
-                    InputStream content = Context.class.getResourceAsStream(contentPath);
                     parser.parse(content,new SAXHandler(parser, this));
                 } catch (IOException ex) {
-                    // FIXME handle IOException
-                    log.error("parsing initial content:", ex);
+                    log.error("Could not parse initial content:  ", ex);
                 } catch (ParserConfigurationException ex)
                 {
-                    // FIXME handle ParserConfigurationException
                     log.error("parsing initial content:", ex);
                 } catch (SAXException ex)
                 {
-                    // FIXME handle SAXException
                     log.error("parsing initial content:", ex);
                 }
             }
