@@ -4,21 +4,11 @@
 
 package net.wood.jndi.EphemeralContext;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Hashtable;
 import javax.naming.*;
-import javax.xml.XMLConstants;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.xml.sax.SAXException;
 
 /**
  * A JNDI context built in memory.  It does not represent a live naming service.
@@ -63,7 +53,7 @@ class Context implements javax.naming.Context
      * @param load Load initial content from an external file?
      */
     protected Context(Hashtable environment, Context parent,
-            String myName, boolean load)
+            String myName)
     {
         if (null == environment)
             this.environment = new Hashtable();
@@ -73,48 +63,6 @@ class Context implements javax.naming.Context
         this.parent = parent;
 
         this.myName = myName;
-
-        if (load)
-        {
-            String contentPath = (String) this.environment.get(
-                    Context.PROVIDER_URL);
-            if (null == contentPath)
-            {
-                log.debug("PROVIDER_URL not specified -- no initial content loaded");
-            }
-            else
-            {
-                // Load content
-                SAXParserFactory spf = SAXParserFactory.newInstance();
-                SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-                InputStream content;
-                try
-                {
-                    URL contentResource = Context.class.getResource(contentPath);
-                    log.info("Loading initial content from {}", contentResource);
-                    content = contentResource.openStream();
-                } catch (IOException ex) {
-                    log.error("Could not open initial content:", ex);
-                    return;
-                }
-
-                try {
-                    Schema mySchema = sf.newSchema(this.getClass().getResource(
-                            "initialContext.xsd"));
-                    spf.setSchema(mySchema);
-                    SAXParser parser = spf.newSAXParser();
-                    parser.parse(content,new SAXHandler(parser, this));
-                } catch (IOException ex) {
-                    log.error("Could not parse initial content:  ", ex);
-                } catch (ParserConfigurationException ex)
-                {
-                    log.error("parsing initial content:", ex);
-                } catch (SAXException ex)
-                {
-                    log.error("parsing initial content:", ex);
-                }
-            }
-        }
     }
 
     public Object lookup(Name name) throws NamingException
@@ -123,7 +71,7 @@ class Context implements javax.naming.Context
             throw new NamingException("null name");
 
         if (name.isEmpty())
-            return new Context(environment, parent, myName, false);
+            return new Context(environment, parent, myName);
 
         // If a supporteded URL, trim off the scheme
         String myPart = name.get(0);
@@ -278,7 +226,7 @@ class Context implements javax.naming.Context
         {
             if (!subContexts.containsKey(name))
             {
-                Context nc = new Context(environment, this, name, false);
+                Context nc = new Context(environment, this, name);
                 subContexts.put(name, nc);
                 return nc;
             }
