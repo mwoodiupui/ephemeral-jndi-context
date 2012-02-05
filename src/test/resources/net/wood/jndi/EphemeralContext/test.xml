@@ -14,7 +14,7 @@
         <context name='env'>
             <context name='jdbc'>
                 <object name='test'
-                        class='net.wood.jndi.EphemeralContext.PostgreSQLDataSource'
+                        class='net.wood.jndi.EphemeralContext.propertyEditors.PostgreSQLDataSource'
                         serverName='localhost'
                         databaseName='mhwood'
                     />
