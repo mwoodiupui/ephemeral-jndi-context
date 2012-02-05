@@ -11,7 +11,6 @@ import org.apache.commons.dbcp.PoolableConnectionFactory;
 import org.apache.commons.dbcp.PoolingDataSource;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.xml.sax.Attributes;
-import org.xml.sax.helpers.DefaultHandler;
 
 /**
  *
@@ -20,12 +19,6 @@ import org.xml.sax.helpers.DefaultHandler;
 public class CommonsDBCPDataSource
 implements PropertyEditor
 {
-
-    public DefaultHandler getHandler()
-    {
-        return null;
-    }
-
     public Object interpret(String uri, String localName, String qName,
             Attributes attributes)
     {
@@ -40,5 +33,4 @@ implements PropertyEditor
         PoolingDataSource dataSource = new PoolingDataSource(connectionPool);
         return dataSource;
     }
-    
 }

@@ -6,7 +6,6 @@ package net.wood.jndi.EphemeralContext;
 
 import org.postgresql.ds.PGSimpleDataSource;
 import org.xml.sax.Attributes;
-import org.xml.sax.helpers.DefaultHandler;
 
 /**
  *
@@ -15,11 +14,6 @@ import org.xml.sax.helpers.DefaultHandler;
 public class PostgreSQLDataSource
 implements PropertyEditor
 {
-    public DefaultHandler getHandler()
-    {
-        return null;
-    }
-
     public PGSimpleDataSource interpret(String uri, String localName, String qName,
             Attributes attributes)
     {

@@ -8,7 +8,6 @@ package net.wood.jndi.EphemeralContext;
 import java.util.Properties;
 import javax.mail.Session;
 import org.xml.sax.Attributes;
-import org.xml.sax.helpers.DefaultHandler;
 
 /**
  *
@@ -17,12 +16,6 @@ import org.xml.sax.helpers.DefaultHandler;
 public class JavaMailSession
 implements PropertyEditor
 {
-
-    public DefaultHandler getHandler()
-    {
-        return null;
-    }
-
     public Object interpret(String uri, String localName, String qName,
             Attributes attributes)
     {

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Hashtable;
-import java.util.Stack;
 import javax.naming.NamingException;
 import javax.naming.spi.InitialContextFactory;
 import javax.xml.XMLConstants;
@@ -19,6 +18,7 @@ import javax.xml.validation.SchemaFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Simple, hierarchial context built in memory.
@@ -53,12 +53,12 @@ public class ContextFactory
         else
         {
             // Load content
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            SchemaFactory sf = SchemaFactory.newInstance(
+            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(
                     XMLConstants.W3C_XML_SCHEMA_NS_URI);
             InputStream content;
             try {
-                URL contentResource = Context.class.getResource(contentPath);
+                URL contentResource = getClass().getResource(contentPath);
                 log.info("Loading initial content from {}", contentResource);
                 content = contentResource.openStream();
             } catch (IOException ex) {
@@ -67,11 +67,12 @@ public class ContextFactory
             }
 
             try {
-                Schema mySchema = sf.newSchema(this.getClass().getResource(
+                Schema mySchema = schemaFactory.newSchema(getClass().getResource(
                         INITIAL_CONTENT_SCHEMA));
-                spf.setSchema(mySchema);
-                SAXParser parser = spf.newSAXParser();
-                parser.parse(content, new SAXHandler(parser, initialContext));
+                parserFactory.setSchema(mySchema);
+                SAXParser parser = parserFactory.newSAXParser();
+                DefaultHandler saxHandler = new ContextHandler(parser, initialContext);
+                parser.parse(content, saxHandler);
             } catch (IOException ex) {
                 log.error("Could not parse initial content:  ", ex);
             } catch (ParserConfigurationException ex) {
