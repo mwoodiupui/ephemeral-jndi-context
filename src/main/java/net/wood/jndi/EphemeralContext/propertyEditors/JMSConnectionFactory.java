@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2012 Mark H. Wood
  */
 
 package net.wood.jndi.EphemeralContext.propertyEditors;

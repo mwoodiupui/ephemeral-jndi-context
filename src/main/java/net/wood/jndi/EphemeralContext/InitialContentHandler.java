@@ -7,6 +7,8 @@ package net.wood.jndi.EphemeralContext;
 import java.util.Stack;
 import javax.naming.Context;
 import javax.naming.NamingException;
+import net.wood.jndi.EphemeralContext.propertyEditors.HasContent;
+import net.wood.jndi.EphemeralContext.propertyEditors.HasText;
 import net.wood.jndi.EphemeralContext.propertyEditors.PropertyEditor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -193,35 +195,9 @@ extends DefaultHandler
         }
     }
 
-    /** Signifies an object which can have non-character content */
-    public interface HasContent
-    {
-        /**
-         * Append an object to this object's non-character content.
-         * 
-         * @param o New content for this object.
-         */
-        public void add(String name, Object o) throws Exception;
-    }
-
-    /** Signifies an object which can have character content. */
-    public interface HasText
-    {
-        /**
-         * Append a value to the character content.
-         * 
-         * @param what 
-         */
-        public void append(String what);
-
-        /**
-         * Get the accumulated character content.
-         * 
-         * @return concatenation of all Strings passed to append().
-         */
-        public String getValue();
-    }
-    
+    /**
+     * Text primitive object.
+     */
     private class Text
     implements HasText
     {

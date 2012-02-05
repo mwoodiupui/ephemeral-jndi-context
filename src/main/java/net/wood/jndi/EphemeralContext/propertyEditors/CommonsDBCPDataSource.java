@@ -1,11 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2011, 2012 Mark H. Wood
  */
 
 package net.wood.jndi.EphemeralContext.propertyEditors;
 
-import net.wood.jndi.EphemeralContext.InitialContentHandler;
 import org.apache.commons.dbcp.ConnectionFactory;
 import org.apache.commons.dbcp.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp.PoolableConnectionFactory;
@@ -18,7 +16,7 @@ import org.xml.sax.Attributes;
  * @author mhwood
  */
 public class CommonsDBCPDataSource
-implements PropertyEditor, InitialContentHandler.HasContent
+implements PropertyEditor, HasContent
 {
     public Object interpret(String uri, String localName, String qName,
             Attributes attributes)

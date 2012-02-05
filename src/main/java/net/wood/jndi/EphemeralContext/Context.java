@@ -6,8 +6,8 @@ package net.wood.jndi.EphemeralContext;
 
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.logging.Level;
 import javax.naming.*;
+import net.wood.jndi.EphemeralContext.propertyEditors.HasContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,19 +20,19 @@ import org.slf4j.LoggerFactory;
  *
  * @author mhwood
  */
-class Context implements javax.naming.Context, InitialContentHandler.HasContent
+class Context implements javax.naming.Context, HasContent
 {
     private final HashMap<String, Context> subContexts = new HashMap<String, Context>();
 
     private final HashMap<String, Object> leaves = new HashMap<String, Object>();
 
-    private final Hashtable environment;
+    final Hashtable environment;
 
-    private final Context parent;
+    final Context parent;
 
     protected static final NameParser myParser = new NameParser();
 
-    private  final String myName;
+    final String myName;
 
     private static final String SEPARATOR = "/";
 
