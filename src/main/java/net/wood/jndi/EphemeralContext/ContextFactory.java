@@ -71,7 +71,7 @@ public class ContextFactory
                         INITIAL_CONTENT_SCHEMA));
                 parserFactory.setSchema(mySchema);
                 SAXParser parser = parserFactory.newSAXParser();
-                DefaultHandler saxHandler = new ContextHandler(parser, initialContext);
+                DefaultHandler saxHandler = new InitialContentHandler(initialContext);
                 parser.parse(content, saxHandler);
             } catch (IOException ex) {
                 log.error("Could not parse initial content:  ", ex);

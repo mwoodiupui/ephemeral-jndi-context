@@ -17,7 +17,7 @@ import org.xml.sax.Attributes;
  * @author mhwood
  */
 public class CommonsDBCPDataSource
-implements PropertyEditor
+implements PropertyEditor, InitialContentHandler.HasContent
 {
     public Object interpret(String uri, String localName, String qName,
             Attributes attributes)
@@ -32,5 +32,11 @@ implements PropertyEditor
                 connectionFactory, connectionPool, null, null, false, true);
         PoolingDataSource dataSource = new PoolingDataSource(connectionPool);
         return dataSource;
+    }
+
+    public void add(String name, Object o)
+    {
+        // TODO here is where the wrapped datasource comes in.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

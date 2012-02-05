@@ -6,6 +6,7 @@ package net.wood.jndi.EphemeralContext;
 
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.logging.Level;
 import javax.naming.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author mhwood
  */
-class Context implements javax.naming.Context
+class Context implements javax.naming.Context, InitialContentHandler.HasContent
 {
     private final HashMap<String, Context> subContexts = new HashMap<String, Context>();
 
@@ -309,5 +310,18 @@ class Context implements javax.naming.Context
             return "";
         
         return composeName(myName, parent.getNameInNamespace());
+    }
+
+    public void add(String name, Object o)
+            throws Exception
+    {
+        if (!(o instanceof Context))
+        {
+            try {
+                bind(name, o);
+            } catch (NamingException ex) {
+                log.error("Unable to bind {}", ex);
+            }
+        }
     }
 }
