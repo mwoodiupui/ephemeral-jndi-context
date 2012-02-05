@@ -2,7 +2,7 @@
  * Copyright 2011 Mark H. Wood
  */
 
-package net.wood.jndi.EphemeralContext;
+package net.wood.jndi.EphemeralContext.propertyEditors;
 
 import org.postgresql.ds.PGSimpleDataSource;
 import org.xml.sax.Attributes;

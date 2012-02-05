@@ -2,7 +2,7 @@
  * Copyright 2011 Mark H. Wood
  */
 
-package net.wood.jndi.EphemeralContext;
+package net.wood.jndi.EphemeralContext.propertyEditors;
 
 import org.xml.sax.Attributes;
 
@@ -12,7 +12,7 @@ import org.xml.sax.Attributes;
  *
  * @author mhwood
  */
-interface PropertyEditor
+public interface PropertyEditor
 {
     /**
      * Interpret the attributes of the XML representation of this type of object.

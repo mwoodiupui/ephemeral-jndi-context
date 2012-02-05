@@ -5,9 +5,9 @@
 package net.wood.jndi.EphemeralContext;
 
 import java.util.Stack;
-import java.util.logging.Level;
 import javax.naming.Context;
 import javax.naming.NamingException;
+import net.wood.jndi.EphemeralContext.propertyEditors.PropertyEditor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;

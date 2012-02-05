@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package net.wood.jndi.EphemeralContext;
+package net.wood.jndi.EphemeralContext.propertyEditors;
 
 import org.xml.sax.Attributes;
 
@@ -11,7 +11,7 @@ import org.xml.sax.Attributes;
  *
  * @author mhwood
  */
-public class JMSDestination
+public class JMSConnectionFactory
 implements PropertyEditor
 {
     public Object interpret(String uri, String localName, String qName,

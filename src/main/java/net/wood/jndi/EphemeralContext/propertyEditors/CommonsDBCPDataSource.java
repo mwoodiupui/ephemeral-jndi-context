@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package net.wood.jndi.EphemeralContext;
+package net.wood.jndi.EphemeralContext.propertyEditors;
 
+import net.wood.jndi.EphemeralContext.InitialContentHandler;
 import org.apache.commons.dbcp.ConnectionFactory;
 import org.apache.commons.dbcp.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp.PoolableConnectionFactory;

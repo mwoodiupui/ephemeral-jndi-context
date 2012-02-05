@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package net.wood.jndi.EphemeralContext;
+package net.wood.jndi.EphemeralContext.propertyEditors;
 
 import java.util.Properties;
 import javax.mail.Session;
