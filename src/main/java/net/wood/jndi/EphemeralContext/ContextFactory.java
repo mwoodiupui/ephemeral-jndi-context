@@ -36,7 +36,7 @@ public class ContextFactory
      * Create an EphemeralContext holding the given environment.
      * 
      * @param environment
-     * @return
+     * @return an initial Context.
      * @throws NamingException
      */
     public javax.naming.Context getInitialContext(Hashtable<?, ?> environment)

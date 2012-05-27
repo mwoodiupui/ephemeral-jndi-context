@@ -20,7 +20,8 @@ public interface PropertyEditor
      * @param uri
      * @param localName
      * @param qName
-     * @param attributes 
+     * @param attributes
+     * @return instance of the represented object. 
      */
     public Object interpret(String uri, String localName, String qName,
             Attributes attributes);

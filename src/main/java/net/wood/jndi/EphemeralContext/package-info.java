@@ -33,7 +33,8 @@
  *      The {@code name} attribute is required.</dd>
  * 
  *   <dt>object</dt>
- *   <dd>An arbitrary object, to be constructed by a named {@link PropertyEditor}.
+ *   <dd>An arbitrary object, to be constructed by a named
+ *      {@link net.wood.jndi.EphemeralContext.propertyEditors.PropertyEditor}.
  *      Attributes:
  *      <dl>
  *          <dt>name</dt><dd>name of the object in the directory
@@ -44,8 +45,8 @@
  * </p>
  * 
  * <p>A {@code PropertyEditor} implementation for PostgreSQL {@code DataSource}
- * objects is supplied.  See the {@link PropertyEditor} interface if you need to
- * implement other types.</p>
+ * objects is supplied.  See the {@link net.wood.jndi.EphemeralContext.propertyEditors.PropertyEditor}
+ * interface if you need to implement other types.</p>
  */
 
 package net.wood.jndi.EphemeralContext;
