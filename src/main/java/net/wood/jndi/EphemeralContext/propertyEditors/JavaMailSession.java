@@ -9,7 +9,10 @@ import javax.mail.Session;
 import org.xml.sax.Attributes;
 
 /**
- *
+ * Configure javax.mail.Session objects.
+ * 
+ * This should work for basic SMTP sessions but is far from complete.
+ * 
  * @author mhwood
  */
 public class JavaMailSession
@@ -28,13 +31,15 @@ implements PropertyEditor
             sessionProps.setProperty("mail.host", attributes.getValue(nAttribute));
         if ((nAttribute = attributes.getIndex("user")) >= 0)
             sessionProps.setProperty("mail.user", attributes.getValue(nAttribute));
+        // TODO mail.password
         if ((nAttribute = attributes.getIndex("from")) >= 0)
             sessionProps.setProperty("mail.from", attributes.getValue(nAttribute));
         if (attributes.getIndex("debug") >= 0)
             sessionProps.setProperty("mail.debug", "true");
         // TODO mail.PROTOCOL.host
         // TODO mail.PROTOCOL.user
-        Session session = Session.getInstance(sessionProps);
+        // TODO mail.PROTOCOL.port
+        Session session = Session.getInstance(sessionProps); // TODO Authenticator
         return session;
     }
     

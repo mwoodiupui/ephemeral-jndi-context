@@ -19,6 +19,12 @@
                         databaseName='mhwood'
                     />
             </context>
+            <context name='mail'>
+                <object name='Session'
+                        class='net.wood.jndi.EphemeralContext.propertyEditors.JavaMailSession'
+                        host='localhost'
+                    /> <!-- TODO configure the session: from.... -->
+            </context>
         </context>
     </context>
 </initialContext>
