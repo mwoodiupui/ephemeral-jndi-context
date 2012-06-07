@@ -6,6 +6,7 @@
 package net.wood.jndi.EphemeralContext;
 
 import java.util.Properties;
+import javax.mail.Session;
 import javax.naming.NamingException;
 import javax.naming.spi.NamingManager;
 import javax.sql.DataSource;
@@ -14,9 +15,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple App.
+ * Unit test for EphemeralContext.
  */
-public class AppTest 
+public class EphemeralContextTest 
     extends TestCase
 {
     /**
@@ -24,7 +25,7 @@ public class AppTest
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public EphemeralContextTest( String testName )
     {
         super( testName );
     }
@@ -34,13 +35,14 @@ public class AppTest
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( EphemeralContextTest.class );
     }
 
     /**
-     * Rigorous Test :-)
+     * Test basic lookup, path traversal, returned object types.
      */
-    public void testApp() throws NamingException
+    public void testEphemeralContext()
+            throws NamingException
     {
         Properties jndiEnvironment = new Properties();
         jndiEnvironment.setProperty(Context.INITIAL_CONTEXT_FACTORY,
@@ -48,8 +50,9 @@ public class AppTest
         jndiEnvironment.setProperty(Context.PROVIDER_URL,
                 "/net/wood/jndi/EphemeralContext/test.xml");
 
-        // java:comp/env/jdbc/NAME
         javax.naming.Context ic = NamingManager.getInitialContext(jndiEnvironment);
+
+        // java:comp/env/jdbc/NAME
         Context jc = (Context) ic.lookup("java:comp");
         Context ec = (Context) jc.lookup("env");
         Context dc = (Context) ec.lookup("jdbc");
@@ -67,5 +70,9 @@ public class AppTest
         Context c1 = (Context) ic.lookup("java:/comp/env");
         Object ds1 = c1.lookup("jdbc/test");
         assertTrue(ds1 instanceof DataSource);
+        
+        // java:comp/env/mail/Session
+        Object om = ic.lookup("java:comp/env/mail/Session");
+        assertTrue(om instanceof Session);
     }
 }

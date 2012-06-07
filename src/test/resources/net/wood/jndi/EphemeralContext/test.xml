@@ -23,8 +23,12 @@
                 <object name='Session'
                         class='net.wood.jndi.EphemeralContext.propertyEditors.JavaMailSession'
                         host='localhost'
-                    /> <!-- TODO configure the session: from.... -->
+                        from='postmaster'
+                    />
             </context>
+            // URL
+            // JMS
+            // Commons DBCP
         </context>
     </context>
 </initialContext>
