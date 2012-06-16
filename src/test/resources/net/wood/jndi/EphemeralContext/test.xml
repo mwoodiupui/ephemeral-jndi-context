@@ -26,9 +26,9 @@
                         from='postmaster'
                     />
             </context>
-            // URL
-            // JMS
-            // Commons DBCP
+            <!-- URL -->
+            <!-- JMS -->
+            <!-- Commons DBCP -->
         </context>
     </context>
 </initialContext>
