@@ -31,6 +31,10 @@
             <name>commits</name>
             <archive>http://java.net/projects/ephemeral-context/lists/commits/archive</archive>
         </mailingList>
+        <mailingList>
+            <name>issues</name>
+            <archive>http://java.net/projects/ephemeral-context/lists/issues/archive</archive>
+        </mailingList>
     </mailingLists>
 
     <developers>
