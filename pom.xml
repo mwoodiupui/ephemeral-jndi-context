@@ -42,6 +42,7 @@
             <id>mhwood</id>
             <name>Mark H. Wood</name>
             <email>mhwood@Ameritech.Net</email>
+            <timezone>-5</timezone>
         </developer>
     </developers>
 
@@ -66,6 +67,20 @@
 
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.naming.factory.initial>
+                            net.wood.jndi.EphemeralContext.ContextFactory
+                        </java.naming.factory.initial>
+                        <java.naming.provider.url>
+                            /net/wood/jndi/EphemeralContext/test.xml
+                        </java.naming.provider.url>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.1</version>
@@ -111,7 +126,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>4.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -154,7 +169,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>2.7.1</version>
                 <configuration>
-                    <targetJdk>1.6</targetJdk>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
                 </configuration>
             </plugin>
             <plugin>
@@ -167,8 +182,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.5</maven.compiler.source>
-        <maven.compiler.target>1.5</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
     </properties>
 
 </project>

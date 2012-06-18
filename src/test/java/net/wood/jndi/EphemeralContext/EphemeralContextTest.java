@@ -5,10 +5,9 @@
 
 package net.wood.jndi.EphemeralContext;
 
-import java.util.Properties;
 import javax.mail.Session;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.naming.spi.NamingManager;
 import javax.sql.DataSource;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -44,13 +43,8 @@ public class EphemeralContextTest
     public void testEphemeralContext()
             throws NamingException
     {
-        Properties jndiEnvironment = new Properties();
-        jndiEnvironment.setProperty(Context.INITIAL_CONTEXT_FACTORY,
-                this.getClass().getPackage().getName() + ".ContextFactory");
-        jndiEnvironment.setProperty(Context.PROVIDER_URL,
-                "/net/wood/jndi/EphemeralContext/test.xml");
-
-        javax.naming.Context ic = NamingManager.getInitialContext(jndiEnvironment);
+        // initial-context factory, URL supplied externally
+        javax.naming.Context ic = new InitialContext(null);
 
         // java:comp/env/jdbc/NAME
         Context jc = (Context) ic.lookup("java:comp");
