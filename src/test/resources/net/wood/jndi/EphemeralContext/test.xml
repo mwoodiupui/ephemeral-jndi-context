@@ -18,6 +18,7 @@
                         serverName='localhost'
                         databaseName='mhwood'
                     />
+                <!-- TODO Commons DBCP -->
             </context>
             <context name='mail'>
                 <object name='Session'
@@ -26,9 +27,17 @@
                         from='postmaster'
                     />
             </context>
-            <!-- URL -->
-            <!-- JMS -->
-            <!-- Commons DBCP -->
+            <context name='url'>
+                <object name='Example'
+                        class='net.wood.jndi.EphemeralContext.propertyEditors.URL'
+                        value='http://www.example.com/foo/bar?blech=argh&amp;urgh=axolotl'/>
+                <object name='BadExample'
+                        class='net.wood.jndi.EphemeralContext.propertyEditors.URL'
+                        value='}barf{'/>
+            </context>
+            <context name='jms'>
+                <!-- TODO JMS objects -->
+            </context>
         </context>
     </context>
 </initialContext>
