@@ -23,9 +23,8 @@ import org.xml.sax.helpers.DefaultHandler;
  * @author mhwood
  */
 public class InitialContentHandler
-extends DefaultHandler
+        extends DefaultHandler
 {
-
     /** The current {@code context} element and its ancestry. */
     private final Stack<Frame> handlerStack = new Stack<Frame>();
 
@@ -41,8 +40,7 @@ extends DefaultHandler
     }
 
     /**
-     * 
-     * @param parser the SAXParser which will call this handler.
+     * Construct a Handler to fill a given Context.
      * @param rootContext the Context to be filled
      */
     InitialContentHandler(Context rootContext)
@@ -165,6 +163,8 @@ extends DefaultHandler
         else
             log.warn("Character data discarded at {}", where());
     }
+
+    // TODO implement ErrorHandler?  parser.setErrorHandler(this)?
 
     /**
      * Disclose current location in the input file.
