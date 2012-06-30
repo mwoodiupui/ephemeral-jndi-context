@@ -6,6 +6,7 @@
 package net.wood.jndi.EphemeralContext;
 
 import java.net.URL;
+import javax.jms.ConnectionFactory;
 import javax.mail.Session;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * Unit test for EphemeralContext.
+ * Unit tests for EphemeralContext.
  */
 public class EphemeralContextTest 
 {
@@ -79,5 +80,16 @@ public class EphemeralContextTest
 
         Object ou2 = ic.lookup("java:comp/env/url/BadExample");
         assertNull("Invalid URL should return null object", ou2);
+    }
+
+    @Test
+    public void testJMS() throws NamingException
+    {
+        // initial-context factory, URL supplied externally
+        javax.naming.Context ic = new InitialContext(null);
+
+        // java:comp/env/jms/Example
+        Object of = ic.lookup("java:comp/env/jms/Factory");
+        assertTrue("Expecting a ConnectionFactory", of instanceof ConnectionFactory);
     }
 }

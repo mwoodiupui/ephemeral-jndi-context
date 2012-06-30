@@ -7,7 +7,7 @@ package net.wood.jndi.EphemeralContext;
 import java.util.HashMap;
 import java.util.Hashtable;
 import javax.naming.*;
-import net.wood.jndi.EphemeralContext.propertyEditors.HasContent;
+import net.wood.jndi.EphemeralContext.objectProviders.HasContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

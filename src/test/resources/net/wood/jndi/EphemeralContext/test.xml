@@ -14,7 +14,7 @@
         <context name='env'>
             <context name='jdbc'>
                 <object name='test'
-                        class='net.wood.jndi.EphemeralContext.propertyEditors.PostgreSQLDataSource'
+                        class='net.wood.jndi.EphemeralContext.objectProviders.PostgreSQLDataSource'
                         serverName='localhost'
                         databaseName='mhwood'
                     />
@@ -22,21 +22,24 @@
             </context>
             <context name='mail'>
                 <object name='Session'
-                        class='net.wood.jndi.EphemeralContext.propertyEditors.JavaMailSession'
+                        class='net.wood.jndi.EphemeralContext.objectProviders.JavaMailSession'
                         host='localhost'
                         from='postmaster'
                     />
             </context>
             <context name='url'>
                 <object name='Example'
-                        class='net.wood.jndi.EphemeralContext.propertyEditors.URL'
+                        class='net.wood.jndi.EphemeralContext.objectProviders.URL'
                         value='http://www.example.com/foo/bar?blech=argh&amp;urgh=axolotl'/>
                 <object name='BadExample'
-                        class='net.wood.jndi.EphemeralContext.propertyEditors.URL'
+                        class='net.wood.jndi.EphemeralContext.objectProviders.URL'
                         value='}barf{'/>
             </context>
             <context name='jms'>
-                <!-- TODO JMS objects -->
+                <object name='Factory'
+                        class='net.wood.jndi.EphemeralContext.objectProviders.AMQConnectionFactory'
+                    />
+                <!-- brokerURL? username? password? -->
             </context>
         </context>
     </context>
