@@ -28,7 +28,7 @@
     Created on : January 18, 2012, 9:14 PM
     Author     : mhwood
     Description:
-        Schema for net.wood.jndi.EphemeralContext initial content.
+        Schema for com.markhwood.jndi.EphemeralContext initial content.
 -->
 
 <xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'>

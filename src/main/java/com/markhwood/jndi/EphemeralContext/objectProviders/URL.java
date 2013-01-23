@@ -19,33 +19,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext.objectProviders;
+package com.markhwood.jndi.EphemeralContext.objectProviders;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
+import java.net.MalformedURLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 
 /**
- * Create a JMS ConnectionFactory using <a href='http://activemq.apache.org'>Apache ActiveMQ</a>.
- *
+ * Create a java.net.URL entry from the specified {@code value} attribute.
+ * <br />
+ * {@code <object class='com.markhwood.jndi.EphemeralContext.propertyEditors.URL'
+ *          value='http://www.example.com/foo/bar'/>}
  * @author mhwood
  */
-public class AMQConnectionFactory
-        implements PropertyEditor
+public class URL
+implements PropertyEditor
 {
+    private static final Logger log = LoggerFactory.getLogger(URL.class);
+
     public Object interpret(String uri, String localName, String qName,
             Attributes attributes)
     {
-        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
-        // TODO configure the factory
-        String property;
-        if (null != (property = attributes.getValue("brokerURL")))
-            factory.setBrokerURL(property);
-        if (null != (property = attributes.getValue("username")))
-            factory.setUserName(property);
-        if (null != (property = attributes.getValue("password")))
-            factory.setPassword(property);
-        // TODO SSL?
-        // TODO AMQ XML configurator?
-        return factory;
+        String property = attributes.getValue("value");
+        java.net.URL result = null;
+
+        if (null == property)
+            log.warn("URL with no value attribute");
+        else
+        {
+            try {
+                result = new java.net.URL(property);
+            } catch (MalformedURLException ex) {
+                log.warn("Uninterpretable URL '{}':  {}",
+                        property, ex.getMessage());
+            }
+        }
+
+        log.debug("returning {}", result);
+        return result;
     }
 }

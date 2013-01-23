@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext.objectProviders;
+package com.markhwood.jndi.EphemeralContext.objectProviders;
 
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -29,9 +29,9 @@ import org.xml.sax.Attributes;
 
 /**
  * Configure javax.mail.Session objects.
- * 
+ *
  * This should work for basic SMTP sessions but is far from complete.
- * 
+ *
  * @author mhwood
  */
 public class JavaMailSession

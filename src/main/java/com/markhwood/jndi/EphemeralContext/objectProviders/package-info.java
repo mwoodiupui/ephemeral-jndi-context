@@ -19,27 +19,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext.objectProviders;
-
-import org.xml.sax.Attributes;
-
 /**
- * Provide interpretation of SAX events from initial content.  This enables the
- * plugging in of arbitrary object types by supplying parsing support.
- *
- * @author mhwood
+ * "Object Providers" are classes which interpret "object"-typed initial content
+ * elements.  They are factories for the type of object represented by their
+ * proper elements.
  */
-public interface PropertyEditor
-{
-    /**
-     * Interpret the attributes of the XML representation of this type of object.
-     * 
-     * @param uri
-     * @param localName
-     * @param qName
-     * @param attributes
-     * @return instance of the represented object. 
-     */
-    public Object interpret(String uri, String localName, String qName,
-            Attributes attributes);
-}
+
+package com.markhwood.jndi.EphemeralContext.objectProviders;

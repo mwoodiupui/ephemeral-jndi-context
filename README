@@ -1,28 +1,28 @@
 EphemeralContext:  a JNDI provider for an in-memory directory
 Copyright 2011, 2012 Mark H. Wood
 
-An EphemeralContext is a lightweight JNDI Context which exists only in 
-memory.  It can be preloaded with objects from an XML description, and 
-can be modified afterward in the usual JNDI fashion.  All changes to the 
+An EphemeralContext is a lightweight JNDI Context which exists only in
+memory.  It can be preloaded with objects from an XML description, and
+can be modified afterward in the usual JNDI fashion.  All changes to the
 initial content are forgotten when the Context is destroyed.
 
-What's it for?  You could use it to stub out a fancier directory service 
-in testing.  I wrote it because I had JNDI-dependent code which needed 
-to run both inside a servlet container (Tomcat) and standalone, so I 
-needed a JNDI service provider to substitute for the one provided by the 
+What's it for?  You could use it to stub out a fancier directory service
+in testing.  I wrote it because I had JNDI-dependent code which needed
+to run both inside a servlet container (Tomcat) and standalone, so I
+needed a JNDI service provider to substitute for the one provided by the
 servlet environment.  You'll probably think of other uses.
 
-EphemeralContext is meant to be an ordinary JNDI directory service 
-provider, and you use it the way you would any other.  For example, you 
-can make it your application's InitialContext provider by specifying 
--Djava.naming.factory.initial=net.wood.jndi.EphemeralContext.ContextFactory.
+EphemeralContext is meant to be an ordinary JNDI directory service
+provider, and you use it the way you would any other.  For example, you
+can make it your application's InitialContext provider by specifying
+-Djava.naming.factory.initial=com.markhwood.jndi.EphemeralContext.ContextFactory.
 
-The initial content file is named by the PROVIDER_URL and is found on 
-the classpath.  That is:  -Djava.naming.provider.url=/some/path.xml will 
-name it.  This isn't a real URL; the file must be on the classpath.  I 
-may add real URL semantics later.  I just needed a way to specify the 
-path to the resource and wanted to use something already defined, if I 
+The initial content file is named by the PROVIDER_URL and is found on
+the classpath.  That is:  -Djava.naming.provider.url=/some/path.xml will
+name it.  This isn't a real URL; the file must be on the classpath.  I
+may add real URL semantics later.  I just needed a way to specify the
+path to the resource and wanted to use something already defined, if I
 could find one close enough in meaning.
 
-This software is provided to you under the terms of an MIT-style 
+This software is provided to you under the terms of an MIT-style
 license, a copy of which is included with the software.

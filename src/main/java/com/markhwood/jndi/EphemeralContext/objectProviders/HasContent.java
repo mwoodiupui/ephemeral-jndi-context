@@ -19,35 +19,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext;
-
-import java.util.Properties;
-import javax.naming.CompoundName;
-import javax.naming.Name;
-import javax.naming.NamingException;
+package com.markhwood.jndi.EphemeralContext.objectProviders;
 
 /**
+ * Signifies an object which can have non-character content.
  *
  * @author mhwood
  */
-class NameParser implements javax.naming.NameParser
+public interface HasContent
 {
-    private static final Properties syntax = new Properties();
-    static {
-        syntax.put("jndi.syntax.direction", "left_to_right");
-	syntax.put("jndi.syntax.separator", "/");
-        syntax.put("jndi.syntax.ignorecase", "false");
-	syntax.put("jndi.syntax.escape", "\\");
-	syntax.put("jndi.syntax.beginquote", "'");
-        syntax.put("jndi.syntax.beginquote2", "\"");
-    }
-
-    public NameParser()
-    {
-    }
-
-    public Name parse(String name) throws NamingException
-    {
-        return new CompoundName(name, syntax);
-    }
+    /**
+     * Append an object to this object's non-character content.
+     *
+     * @param name
+     * @param o New content for this object.
+     * @throws Exception
+     */
+    public void add(String name, Object o) throws Exception;
 }

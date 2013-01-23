@@ -19,18 +19,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext;
+package com.markhwood.jndi.EphemeralContext;
 
 import java.util.HashMap;
 import java.util.Hashtable;
 import javax.naming.*;
-import net.wood.jndi.EphemeralContext.objectProviders.HasContent;
+import com.markhwood.jndi.EphemeralContext.objectProviders.HasContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * A JNDI context built in memory.  It does not represent a live naming service.
- * 
+ *
  * Of note:  {@code java.naming.provider.url} is not interpreted as a URL by this
  * provider; instead it names a resource looked up on the classpath and used to
  * provide initial content.
@@ -64,7 +64,7 @@ class Context implements javax.naming.Context, HasContent
 
     /**
      * Create a functional Context.
-     * 
+     *
      * @param environment
      * @param parent Context which contains this one.
      * @param myName Name of this Context.  Not null.
@@ -325,7 +325,7 @@ class Context implements javax.naming.Context, HasContent
     {
         if (null == parent)
             return "";
-        
+
         return composeName(myName, parent.getNameInNamespace());
     }
 

@@ -19,21 +19,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext.objectProviders;
+package com.markhwood.jndi.EphemeralContext.objectProviders;
+
+import org.xml.sax.Attributes;
 
 /**
- * Signifies an object which can have non-character content.
+ * Provide interpretation of SAX events from initial content.  This enables the
+ * plugging in of arbitrary object types by supplying parsing support.
  *
  * @author mhwood
  */
-public interface HasContent
+public interface PropertyEditor
 {
     /**
-     * Append an object to this object's non-character content.
+     * Interpret the attributes of the XML representation of this type of object.
      *
-     * @param name 
-     * @param o New content for this object.
-     * @throws Exception  
+     * @param uri
+     * @param localName
+     * @param qName
+     * @param attributes
+     * @return instance of the represented object.
      */
-    public void add(String name, Object o) throws Exception;
+    public Object interpret(String uri, String localName, String qName,
+            Attributes attributes);
 }

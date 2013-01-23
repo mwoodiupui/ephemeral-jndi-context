@@ -19,26 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext.objectProviders;
+package com.markhwood.jndi.EphemeralContext.objectProviders;
+
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.xml.sax.Attributes;
 
 /**
- * Signifies an object which can have character content.
+ * Create a JMS ConnectionFactory using <a href='http://activemq.apache.org'>Apache ActiveMQ</a>.
  *
  * @author mhwood
  */
-public interface HasText
+public class AMQConnectionFactory
+        implements PropertyEditor
 {
-    /**
-     * Append a value to the character content.
-     *
-     * @param what
-     */
-    public void append(String what);
-
-    /**
-     * Get the accumulated character content.
-     *
-     * @return concatenation of all Strings passed to append().
-     */
-    public String getValue();
+    public Object interpret(String uri, String localName, String qName,
+            Attributes attributes)
+    {
+        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
+        // TODO configure the factory
+        String property;
+        if (null != (property = attributes.getValue("brokerURL")))
+            factory.setBrokerURL(property);
+        if (null != (property = attributes.getValue("username")))
+            factory.setUserName(property);
+        if (null != (property = attributes.getValue("password")))
+            factory.setPassword(property);
+        // TODO SSL?
+        // TODO AMQ XML configurator?
+        return factory;
+    }
 }

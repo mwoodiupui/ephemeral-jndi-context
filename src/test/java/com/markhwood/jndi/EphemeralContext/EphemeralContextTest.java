@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext;
+package com.markhwood.jndi.EphemeralContext;
 
 import java.net.URL;
 import javax.jms.ConnectionFactory;
@@ -34,7 +34,7 @@ import org.junit.Test;
 /**
  * Unit tests for EphemeralContext.
  */
-public class EphemeralContextTest 
+public class EphemeralContextTest
 {
     /**
      * Test basic lookup, path traversal, returned object types.

@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext.objectProviders;
+package com.markhwood.jndi.EphemeralContext.objectProviders;
 
 import org.postgresql.ds.PGSimpleDataSource;
 import org.xml.sax.Attributes;

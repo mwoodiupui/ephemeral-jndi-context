@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext;
+package com.markhwood.jndi.EphemeralContext;
 
 import java.util.Stack;
 import javax.naming.Context;
 import javax.naming.NamingException;
-import net.wood.jndi.EphemeralContext.objectProviders.HasContent;
-import net.wood.jndi.EphemeralContext.objectProviders.HasText;
-import net.wood.jndi.EphemeralContext.objectProviders.PropertyEditor;
+import com.markhwood.jndi.EphemeralContext.objectProviders.HasContent;
+import com.markhwood.jndi.EphemeralContext.objectProviders.HasText;
+import com.markhwood.jndi.EphemeralContext.objectProviders.PropertyEditor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -128,7 +128,7 @@ public class InitialContentHandler
             }
         }
     }
-    
+
     @Override
     public void endElement(String uri, String localName, String qName)
     {
@@ -168,7 +168,7 @@ public class InitialContentHandler
             }
         }
     }
-    
+
     @Override
     public void characters(char[] ch, int start, int length)
     {
@@ -185,7 +185,7 @@ public class InitialContentHandler
 
     /**
      * Disclose current location in the input file.
-     * 
+     *
      * @return line/column coordinates.
      */
     private String where()

@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.wood.jndi.EphemeralContext;
+package com.markhwood.jndi.EphemeralContext;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,7 +52,7 @@ public class ContextFactory
 
     /**
      * Create an EphemeralContext holding the given environment.
-     * 
+     *
      * @param environment
      * @return an initial Context.
      * @throws NamingException

@@ -73,10 +73,10 @@
                 <configuration>
                     <systemPropertyVariables>
                         <java.naming.factory.initial>
-                            net.wood.jndi.EphemeralContext.ContextFactory
+                            com.markhwood.jndi.EphemeralContext.ContextFactory
                         </java.naming.factory.initial>
                         <java.naming.provider.url>
-                            /net/wood/jndi/EphemeralContext/test.xml
+                            /com/markhwood/jndi/EphemeralContext/test.xml
                         </java.naming.provider.url>
                     </systemPropertyVariables>
                 </configuration>
