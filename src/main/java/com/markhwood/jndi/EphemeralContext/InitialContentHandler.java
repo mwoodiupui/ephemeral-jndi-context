@@ -24,6 +24,7 @@ package com.markhwood.jndi.EphemeralContext;
 import java.util.Stack;
 import javax.naming.Context;
 import javax.naming.NamingException;
+
 import com.markhwood.jndi.EphemeralContext.objectProviders.HasContent;
 import com.markhwood.jndi.EphemeralContext.objectProviders.HasText;
 import com.markhwood.jndi.EphemeralContext.objectProviders.PropertyEditor;
@@ -43,7 +44,7 @@ public class InitialContentHandler
         extends DefaultHandler
 {
     /** The current {@code context} element and its ancestry. */
-    private final Stack<Frame> handlerStack = new Stack<Frame>();
+    private final Stack<Frame> handlerStack = new Stack<>();
 
     /** Usual message sink. */
     private static final Logger log = LoggerFactory.getLogger(InitialContentHandler.class);
@@ -216,15 +217,17 @@ public class InitialContentHandler
      * Text primitive object.
      */
     private class Text
-    implements HasText
+        implements HasText
     {
         private final StringBuffer value = new StringBuffer(64);
 
+        @Override
         public void append(String more)
         {
             value.append(more);
         }
 
+        @Override
         public String getValue()
         {
             return value.toString();

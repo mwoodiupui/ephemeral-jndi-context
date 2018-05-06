@@ -31,9 +31,9 @@ public interface HasContent
     /**
      * Append an object to this object's non-character content.
      *
-     * @param name
+     * @param name name of the content.
      * @param o New content for this object.
-     * @throws Exception
+     * @throws Exception if content is bad.
      */
     public void add(String name, Object o) throws Exception;
 }

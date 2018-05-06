@@ -28,13 +28,13 @@ import org.xml.sax.Attributes;
 
 /**
  * Create a java.net.URL entry from the specified {@code value} attribute.
- * <br />
+ * <p>
  * {@code <object class='com.markhwood.jndi.EphemeralContext.propertyEditors.URL'
  *          value='http://www.example.com/foo/bar'/>}
  * @author mhwood
  */
 public class URL
-implements PropertyEditor
+    implements PropertyEditor
 {
     private static final Logger log = LoggerFactory.getLogger(URL.class);
 

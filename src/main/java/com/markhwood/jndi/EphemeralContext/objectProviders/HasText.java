@@ -31,7 +31,7 @@ public interface HasText
     /**
      * Append a value to the character content.
      *
-     * @param what
+     * @param what character content to be appended.
      */
     public void append(String what);
 

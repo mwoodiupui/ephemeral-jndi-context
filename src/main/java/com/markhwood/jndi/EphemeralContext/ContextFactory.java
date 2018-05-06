@@ -33,6 +33,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -48,15 +49,16 @@ public class ContextFactory
 {
     private static final String INITIAL_CONTENT_SCHEMA = "initialContext.xsd";
 
-    private static final Logger log = LoggerFactory.getLogger(ContextFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ContextFactory.class);
 
     /**
      * Create an EphemeralContext holding the given environment.
      *
-     * @param environment
+     * @param environment properties to be set on the Context.
      * @return an initial Context.
-     * @throws NamingException
+     * @throws NamingException if the initial content could not be loaded.
      */
+    @Override
     public javax.naming.Context getInitialContext(Hashtable<?, ?> environment)
             throws NamingException
     {
@@ -66,7 +68,7 @@ public class ContextFactory
                 Context.PROVIDER_URL);
         if (null == contentPath)
         {
-            log.debug("PROVIDER_URL not specified -- no initial content loaded");
+            LOG.debug("PROVIDER_URL not specified -- no initial content loaded");
         }
         else
         {
@@ -77,10 +79,10 @@ public class ContextFactory
             InputStream content;
             try {
                 URL contentResource = getClass().getResource(contentPath);
-                log.info("Loading initial content from {}", contentResource);
+                LOG.info("Loading initial content from {}", contentResource);
                 content = contentResource.openStream();
             } catch (IOException ex) {
-                log.error("Could not open initial content:", ex);
+                LOG.error("Could not open initial content:", ex);
                 throw new NamingException("Could not open initial content");
             }
 
@@ -92,11 +94,9 @@ public class ContextFactory
                 DefaultHandler saxHandler = new InitialContentHandler(initialContext);
                 parser.parse(content, saxHandler);
             } catch (IOException ex) {
-                log.error("Could not parse initial content:  ", ex);
-            } catch (ParserConfigurationException ex) {
-                log.error("parsing initial content:", ex);
-            } catch (SAXException ex) {
-                log.error("parsing initial content:", ex);
+                LOG.error("Could not parse initial content:  ", ex);
+            } catch (ParserConfigurationException | SAXException ex) {
+                LOG.error("parsing initial content:", ex);
             }
         }
 

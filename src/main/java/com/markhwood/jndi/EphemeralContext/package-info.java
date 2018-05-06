@@ -37,8 +37,8 @@
  * the PROVIDER_URL.  This can be specified with -Djava.naming.provider.url=/some/path
  * or in a jndi.properties.</p>
  *
- * <p>The initial content is an XML document composed of the following elements.
- *  <dl>
+ * <p>The initial content is an XML document composed of the following elements.</p>
+ * <dl>
  *   <dt>initialContext</dt>
  *   <dd>The root element of the document.</dd>
  *
@@ -58,8 +58,7 @@
  *          <dt>class</dt><dd>fully-qualified name of the needed {@code PropertyEditor} class.</dd>
  *      </dl>
  *   </dd>
- *  </dl>
- * </p>
+ * </dl>
  *
  * <p>A {@code PropertyEditor} implementation for PostgreSQL {@code DataSource}
  * objects is supplied.  See the {@link com.markhwood.jndi.EphemeralContext.objectProviders.PostgreSQLDataSource}

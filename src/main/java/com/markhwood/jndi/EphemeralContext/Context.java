@@ -23,7 +23,14 @@ package com.markhwood.jndi.EphemeralContext;
 
 import java.util.HashMap;
 import java.util.Hashtable;
-import javax.naming.*;
+import javax.naming.Binding;
+import javax.naming.CompositeName;
+import javax.naming.Name;
+import javax.naming.NameClassPair;
+import javax.naming.NameNotFoundException;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+
 import com.markhwood.jndi.EphemeralContext.objectProviders.HasContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,16 +39,16 @@ import org.slf4j.LoggerFactory;
  * A JNDI context built in memory.  It does not represent a live naming service.
  *
  * Of note:  {@code java.naming.provider.url} is not interpreted as a URL by this
- * provider; instead it names a resource looked up on the classpath and used to
+ * provider; instead it names a resource looked up on the class path and used to
  * provide initial content.
  *
  * @author mhwood
  */
 class Context implements javax.naming.Context, HasContent
 {
-    private final HashMap<String, Context> subContexts = new HashMap<String, Context>();
+    private final HashMap<String, Context> subContexts = new HashMap<>();
 
-    private final HashMap<String, Object> leaves = new HashMap<String, Object>();
+    private final HashMap<String, Object> leaves = new HashMap<>();
 
     final Hashtable environment;
 
@@ -57,7 +64,7 @@ class Context implements javax.naming.Context, HasContent
 
     private Context()
     {
-        environment = new Hashtable();
+        environment = new Hashtable<>();
         parent = null;
         myName = null;
     }
@@ -74,7 +81,7 @@ class Context implements javax.naming.Context, HasContent
             String myName)
     {
         if (null == environment)
-            this.environment = new Hashtable();
+            this.environment = new Hashtable<>();
         else
             this.environment = (Hashtable) environment.clone();
 
@@ -83,6 +90,7 @@ class Context implements javax.naming.Context, HasContent
         this.myName = myName;
     }
 
+    @Override
     public Object lookup(Name name) throws NamingException
     {
         if (null == name)
@@ -131,11 +139,13 @@ class Context implements javax.naming.Context, HasContent
         }
     }
 
+    @Override
     public Object lookup(String name) throws NamingException
     {
         return lookup(new CompositeName(name));
     }
 
+    @Override
     public void bind(Name name, Object o) throws NamingException
     {
         if (null == name)
@@ -163,76 +173,91 @@ class Context implements javax.naming.Context, HasContent
         }
     }
 
+    @Override
     public void bind(String name, Object o) throws NamingException
     {
         bind(new CompositeName(name), o);
     }
 
+    @Override
     public void rebind(Name name, Object o) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void rebind(String name, Object o) throws NamingException
     {
         rebind(new CompositeName(name), o);
     }
 
+    @Override
     public void unbind(Name name) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void unbind(String name) throws NamingException
     {
         unbind(new CompositeName(name));
     }
 
+    @Override
     public void rename(Name name, Name name1) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void rename(String name, String name1) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public NamingEnumeration<NameClassPair> list(Name name) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public NamingEnumeration<NameClassPair> list(String name) throws NamingException
     {
         return list(new CompositeName(name));
     }
 
+    @Override
     public NamingEnumeration<Binding> listBindings(Name name) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public NamingEnumeration<Binding> listBindings(String name) throws NamingException
     {
         return listBindings(new CompositeName(name));
     }
 
+    @Override
     public void destroySubcontext(Name name) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public void destroySubcontext(String name) throws NamingException
     {
         destroySubcontext(new CompositeName(name));
     }
 
+    @Override
     public Context createSubcontext(Name name) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public Context createSubcontext(String name) throws NamingException
     {
         if (null == name)
@@ -260,27 +285,32 @@ class Context implements javax.naming.Context, HasContent
         }
     }
 
+    @Override
     public Object lookupLink(Name name) throws NamingException
     {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
     public Object lookupLink(String name) throws NamingException
     {
         return lookupLink(new CompositeName(name));
     }
 
+    @Override
     public NameParser getNameParser(Name name) throws NamingException
     {
         // TODO check name?  Does this need to hand off to federated providers?
         return myParser;
     }
 
+    @Override
     public NameParser getNameParser(String name) throws NamingException
     {
         return getNameParser(new CompositeName(name));
     }
 
+    @Override
     public Name composeName(Name name, Name prefix) throws NamingException
     {
         if (null == name || null == prefix)
@@ -290,6 +320,7 @@ class Context implements javax.naming.Context, HasContent
         return new CompositeName().addAll(prefix).addAll(name);
     }
 
+    @Override
     public String composeName(String name, String prefix) throws NamingException
     {
         if (null == name || null == prefix)
@@ -299,6 +330,8 @@ class Context implements javax.naming.Context, HasContent
         return name + SEPARATOR + prefix;
     }
 
+    @Override
+    @SuppressWarnings("unchecked") // JNDI predates generics?
     public Object addToEnvironment(String key, Object value) throws NamingException
     {
         Object oldValue = environment.get(key);
@@ -306,21 +339,25 @@ class Context implements javax.naming.Context, HasContent
         return oldValue;
     }
 
+    @Override
     public Object removeFromEnvironment(String key) throws NamingException
     {
         return environment.remove(key);
     }
 
-    public Hashtable getEnvironment() throws NamingException
+    @Override
+    public Hashtable<?, ?> getEnvironment() throws NamingException
     {
-        return (Hashtable) environment.clone();
+        return (Hashtable<?, ?>) environment.clone();
     }
 
+    @Override
     public void close() throws NamingException
     {
         // Nothing to do
     }
 
+    @Override
     public String getNameInNamespace() throws NamingException
     {
         if (null == parent)
@@ -329,6 +366,7 @@ class Context implements javax.naming.Context, HasContent
         return composeName(myName, parent.getNameInNamespace());
     }
 
+    @Override
     public void add(String name, Object o)
             throws Exception
     {

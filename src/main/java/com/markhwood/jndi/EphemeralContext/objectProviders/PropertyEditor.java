@@ -34,10 +34,10 @@ public interface PropertyEditor
     /**
      * Interpret the attributes of the XML representation of this type of object.
      *
-     * @param uri
-     * @param localName
-     * @param qName
-     * @param attributes
+     * @param uri TODO
+     * @param localName simple name of the property.
+     * @param qName qualified name of the property.
+     * @param attributes attributes supplied on the property.
      * @return instance of the represented object.
      */
     public Object interpret(String uri, String localName, String qName,
