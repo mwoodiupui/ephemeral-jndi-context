@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011, 2012 Mark H. Wood
+ * Copyright (C) 2011, 2012, 2024 Mark H. Wood
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -31,6 +31,7 @@ import org.xml.sax.Attributes;
 public class PostgreSQLDataSource
 implements PropertyEditor
 {
+    @Override
     public PGSimpleDataSource interpret(String uri, String localName, String qName,
             Attributes attributes)
     {
@@ -42,7 +43,7 @@ implements PropertyEditor
         if (null != (property = attributes.getValue("databaseName")))
             ds.setDatabaseName(property);
         if (null != (property = attributes.getValue("portNumber")))
-            ds.setPortNumber(Integer.valueOf(property));
+            ds.setPortNumber(Integer.parseInt(property));
         if (null != (property = attributes.getValue("user")))
             ds.setUser(property);
         if (null != (property = attributes.getValue("password")))
