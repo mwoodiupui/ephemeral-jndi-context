@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011, 2012 Mark H. Wood
+ * Copyright (C) 2011, 2012, 2024 Mark H. Wood
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -32,6 +32,7 @@ import org.xml.sax.Attributes;
 public class AMQConnectionFactory
         implements PropertyEditor
 {
+    @Override
     public Object interpret(String uri, String localName, String qName,
             Attributes attributes)
     {

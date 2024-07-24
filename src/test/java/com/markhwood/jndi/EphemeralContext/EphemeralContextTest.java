@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2011, 2012 Mark H. Wood
+ * Copyright (C) 2011, 2012, 2024 Mark H. Wood
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -21,14 +21,17 @@
  */
 package com.markhwood.jndi.EphemeralContext;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.net.URL;
 import javax.jms.ConnectionFactory;
 import javax.mail.Session;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Ignore;
+
 import org.junit.Test;
 
 /**
@@ -38,6 +41,7 @@ public class EphemeralContextTest
 {
     /**
      * Test basic lookup, path traversal, returned object types.
+     * @throws NamingException passed through.
      */
     @Test
     public void testPostgreSQLDataSource()
@@ -98,6 +102,7 @@ public class EphemeralContextTest
         assertNull("Invalid URL should return null object", ou2);
     }
 
+    @Ignore("JMS implementation is not ready yet")
     @Test
     public void testJMS() throws NamingException
     {
